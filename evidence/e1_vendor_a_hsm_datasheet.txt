@@ -1,0 +1,1 @@
+NitroVault HSM-3000 Technical Datasheet (Rev 4.2): Certified FIPS 140-3 Level 3 hardware security module. Benchmarked throughput: 14,500 ECDSA-P256 signing operations per second. Power architecture: Dual redundant hot-swappable AC/DC power supplies.

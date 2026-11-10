@@ -1,0 +1,1 @@
+AegisCore Enterprise HSM-9000 Datasheet (Rev 2.1): Certified FIPS 140-3 Level 3 hardware security module. Benchmarked throughput: 22,000 ECDSA-P256 signing operations per second. Power architecture: Dual redundant hot-swappable power supplies.
