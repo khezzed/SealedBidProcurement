@@ -1,0 +1,1134 @@
+{
+  "projectName": "SealedBidProcurement",
+  "description": "Two-phase commit-reveal procurement auction Intelligent Contract on GenLayer StudioNet with dual-LLM entailment and specification verification and Vickrey second-price settlement",
+  "sourceCommitSha": "1108c56ea9f70058e196926cf9910dc3eec09cbc",
+  "contractPath": "contracts/sealed_bid_procurement.py",
+  "gitBlobHash": "568dd587a255a912fcc393b2d36249323dd9bc92",
+  "localContractSha256": "629e926aec1580b3857f1d667624f035dc31ad7e41489bb1ba36ddc7003e55f1",
+  "deployedCodeSha256": "629e926aec1580b3857f1d667624f035dc31ad7e41489bb1ba36ddc7003e55f1",
+  "blobEqualityResult": "MATCH (100% byte-for-byte)",
+  "runnerHash": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6",
+  "environment": "StudioNet",
+  "network": "studionet",
+  "rpcUrl": "https://studio.genlayer.com/api",
+  "accounts": {
+    "buyer": {
+      "role": "Procurement Authority / Deployer",
+      "address": "0x5B0f3d7ecedB2d857DA713F94F41117A0C8dB156"
+    },
+    "vendorA": {
+      "role": "Vendor A (Compliant, Price 210, Winner)",
+      "address": "0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26"
+    },
+    "vendorB": {
+      "role": "Vendor B (Lowball Non-Compliant, Price 120, Ineligible)",
+      "address": "0x31b5b8466098E9801Faa4B212E311d6721899A49"
+    },
+    "vendorC": {
+      "role": "Vendor C (Compliant, Price 340, Second Price Clearer)",
+      "address": "0x9030a15def71EEDCe0467f8023d1F1979aFb6336"
+    }
+  },
+  "probeContract": {
+    "codePath": "deploy/probe.py",
+    "runnerHash": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6",
+    "address": "0xab2f00925D0Fe4c08bBCBC764e88526D9511Fdb1",
+    "deployTx": "0xf2c92ecf271c89a273438b5990e1e0d296ef0d1d68a8e0f5d448058fbb88f350",
+    "setTx": "0xb9f9eb007e419dcc0be973794c855495a5ccac77b639176a2af14cf40888773a",
+    "verifiedValue": "probe_ok"
+  },
+  "mainContract": {
+    "address": "0x5AA77e0869720E009B39f30D6b523BDeEFBCF1ba",
+    "deployTx": "0x1245fc615f9d0eef80779f66f86d5d6bb4339fdb7187384ac04047ae1713e0ea"
+  },
+  "evidenceFiles": [
+    {
+      "file": "evidence/e1_vendor_a_hsm_datasheet.txt",
+      "size": 250,
+      "sha256": "46621336c20d899c37bfc576baf5419e52abacd47244a3f708b6cb2f8e0014af",
+      "url": "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e1_vendor_a_hsm_datasheet.txt"
+    },
+    {
+      "file": "evidence/e2_vendor_b_lowball_datasheet.txt",
+      "size": 266,
+      "sha256": "4a6eb9235bf766a4ec0882ae68d9799a455b3307acfe20726ce35ce1167d9015",
+      "url": "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e2_vendor_b_lowball_datasheet.txt"
+    },
+    {
+      "file": "evidence/e3_vendor_c_hsm_datasheet.txt",
+      "size": 244,
+      "sha256": "756f48dc69a54190d56a2bd40c97ce842a86260f04eab6d009906fe1c8a6fc27",
+      "url": "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e3_vendor_c_hsm_datasheet.txt"
+    },
+    {
+      "file": "evidence/e4_unrelated_catering_menu.txt",
+      "size": 133,
+      "sha256": "537058a65fcacb58a97645a6c370c155f446cb0964fc769028b4e2ddff49182f",
+      "url": "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e4_unrelated_catering_menu.txt"
+    }
+  ],
+  "interrupted_by_restart_v1": {
+    "note": "Prior tenders interrupted by wall-clock timeout and server restart network disconnection. Preserved honestly.",
+    "tender1": {
+      "label": "Tender 1 Interrupted By Wall-Clock Timeout During Initial Setup",
+      "tenderId": 1,
+      "explanation": "During initial run, sequential transaction confirmation latency caused Tender 1 commit deadline (240s) to pass before X2 reached validators. Honest archival preserved on-chain.",
+      "transactions": [
+        {
+          "step": "S1",
+          "scenario": "Open Procurement Tender with Technical Specification",
+          "method": "open_tender",
+          "account": "Buyer",
+          "args": [
+            "Production HSM Cluster Procurement",
+            "Mandatory technical requirements: (1) FIPS 140-3 Level 3 certification, (2) at least 10,000 ECDSA-P256 signing operations per second, and (3) dual redundant hot-swappable power supplies.",
+            500,
+            240,
+            480
+          ],
+          "hash": "0x38177c5caa550a081e63b7a2510307d623b68f086869edb4cef35a6e8410e82e",
+          "status": "FINALIZED",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "1",
+          "votes": {
+            "0x0174b4D7494Be33F46B76976f6c9F94004F1b27f": "agree",
+            "0x0cf3809a31B0c7E0742d126451aDE1977e3748D2": "agree",
+            "0x37CD8552B86b2B662eCfb69C4A1253dBE41EB4C1": "idle",
+            "0x709a1dDECA594C16AB3864A00Eaa2BB1Cd9b5305": "idle",
+            "0xe83D7241D0FF0f1f808B9ab3cb06dD2565bDc605": "agree"
+          },
+          "expected": "1",
+          "actual": "1",
+          "expectedFailure": false,
+          "readBack": {
+            "id": 1,
+            "buyer": "0x5B0f3d7ecedB2d857DA713F94F41117A0C8dB156",
+            "title": "Production HSM Cluster Procurement",
+            "requirements_spec": "Mandatory technical requirements: (1) FIPS 140-3 Level 3 certification, (2) at least 10,000 ECDSA-P256 signing operations per second, and (3) dual redundant hot-swappable power supplies.",
+            "reserve_price": 500,
+            "commit_duration": 240,
+            "reveal_duration": 480,
+            "commit_deadline": 1794334764,
+            "reveal_deadline": 1794335244,
+            "status": "OPEN",
+            "commits": {},
+            "revealed_bids": [],
+            "reveal_attempts": 0,
+            "settlement": {}
+          }
+        },
+        {
+          "step": "S2",
+          "scenario": "Vendor B Submits Cryptographic Bid Commitment",
+          "method": "commit_bid",
+          "account": "Vendor B",
+          "args": [
+            1,
+            "cfc0f8f0413fecd85dcf66a3060a38701b955276456a38e01e415da7d18db6b0"
+          ],
+          "hash": "0x18d881f5905c00f4b45aacbd7eedadb76b0813fc7a37d3708d660bd1bc1827c7",
+          "status": "FINALIZED",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "COMMITTED:TENDER_1:VENDOR_0x31b5b8466098e9801faa4b212e311d6721899a49",
+          "votes": {
+            "0x2bB088e4E6Fd1faBBd23d93F38D01f28a954A49c": "agree",
+            "0x560FBD37a10bC2B96F118071e922c9106c12Ba1d": "agree",
+            "0x722474B013fA39E5aA8785f927dCeB0e3F89815B": "idle",
+            "0x8f1abcAF0fF10678Af925f83b2Bb8b3534c4b94b": "agree",
+            "0xD0eD149D26E76cf49fB588c970E608E44Dd4DAB8": "idle"
+          },
+          "expected": "COMMITTED:TENDER_1:VENDOR_0x31b5b8466098e9801faa4b212e311d6721899a49",
+          "actual": "COMMITTED:TENDER_1:VENDOR_0x31b5b8466098e9801faa4b212e311d6721899a49",
+          "expectedFailure": false,
+          "readBack": {
+            "commitsCount": 1,
+            "commits": {
+              "0x31b5b8466098e9801faa4b212e311d6721899a49": {
+                "vendor": "0x31b5b8466098E9801Faa4B212E311d6721899A49",
+                "commitment_hash": "cfc0f8f0413fecd85dcf66a3060a38701b955276456a38e01e415da7d18db6b0",
+                "committed_at": 1794334568,
+                "revealed": false
+              }
+            }
+          }
+        },
+        {
+          "step": "S3",
+          "scenario": "Vendor A Submits Cryptographic Bid Commitment",
+          "method": "commit_bid",
+          "account": "Vendor A",
+          "args": [
+            1,
+            "27625b070acca51ab2fce230863661054f331deb2c88ea0870bdcca181a46b7f"
+          ],
+          "hash": "0x8be957b4880eb98e9fd70b2e514bd596ad1c9992c6c62698bc94d406b7dc0084",
+          "status": "FINALIZED",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "COMMITTED:TENDER_1:VENDOR_0x3c8221b634778c88f6cd1287edeb8cf6e800cf26",
+          "votes": {
+            "0x0174b4D7494Be33F46B76976f6c9F94004F1b27f": "agree",
+            "0x2bB088e4E6Fd1faBBd23d93F38D01f28a954A49c": "agree",
+            "0xD0eD149D26E76cf49fB588c970E608E44Dd4DAB8": "idle",
+            "0xe1626534791FC675ED813Cc2C89C427866526113": "idle",
+            "0xf1EAD5E5f876eae701eF1881b42861079cd9A287": "agree"
+          },
+          "expected": "COMMITTED:TENDER_1:VENDOR_0x3c8221b634778c88f6cd1287edeb8cf6e800cf26",
+          "actual": "COMMITTED:TENDER_1:VENDOR_0x3c8221b634778c88f6cd1287edeb8cf6e800cf26",
+          "expectedFailure": false,
+          "readBack": {
+            "commitsCount": 2,
+            "commits": {
+              "0x31b5b8466098e9801faa4b212e311d6721899a49": {
+                "vendor": "0x31b5b8466098E9801Faa4B212E311d6721899A49",
+                "commitment_hash": "cfc0f8f0413fecd85dcf66a3060a38701b955276456a38e01e415da7d18db6b0",
+                "committed_at": 1794334568,
+                "revealed": false
+              },
+              "0x3c8221b634778c88f6cd1287edeb8cf6e800cf26": {
+                "vendor": "0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26",
+                "commitment_hash": "27625b070acca51ab2fce230863661054f331deb2c88ea0870bdcca181a46b7f",
+                "committed_at": 1794334615,
+                "revealed": false
+              }
+            }
+          }
+        },
+        {
+          "step": "S4",
+          "scenario": "Vendor C Submits Cryptographic Bid Commitment",
+          "method": "commit_bid",
+          "account": "Vendor C",
+          "args": [
+            1,
+            "08aed8f358620c230b9dad7022564483722102fe88f797d5a3c88cc136584bed"
+          ],
+          "hash": "0xfdf7d84104d1d2a7f47623c2bee3a25898f716a8189173797c1537bacb84aa31",
+          "status": "FINALIZED",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "COMMITTED:TENDER_1:VENDOR_0x9030a15def71eedce0467f8023d1f1979afb6336",
+          "votes": {
+            "0x2C93031BCCd12836A67f81a249e68abAFEaac2E5": "agree",
+            "0x709a1dDECA594C16AB3864A00Eaa2BB1Cd9b5305": "agree",
+            "0x8f1abcAF0fF10678Af925f83b2Bb8b3534c4b94b": "agree",
+            "0xe1626534791FC675ED813Cc2C89C427866526113": "agree",
+            "0xf1EAD5E5f876eae701eF1881b42861079cd9A287": "idle"
+          },
+          "expected": "COMMITTED:TENDER_1:VENDOR_0x9030a15def71eedce0467f8023d1f1979afb6336",
+          "actual": "COMMITTED:TENDER_1:VENDOR_0x9030a15def71eedce0467f8023d1f1979afb6336",
+          "expectedFailure": false,
+          "readBack": {
+            "commitsCount": 3,
+            "commits": {
+              "0x31b5b8466098e9801faa4b212e311d6721899a49": {
+                "vendor": "0x31b5b8466098E9801Faa4B212E311d6721899A49",
+                "commitment_hash": "cfc0f8f0413fecd85dcf66a3060a38701b955276456a38e01e415da7d18db6b0",
+                "committed_at": 1794334568,
+                "revealed": false
+              },
+              "0x3c8221b634778c88f6cd1287edeb8cf6e800cf26": {
+                "vendor": "0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26",
+                "commitment_hash": "27625b070acca51ab2fce230863661054f331deb2c88ea0870bdcca181a46b7f",
+                "committed_at": 1794334615,
+                "revealed": false
+              },
+              "0x9030a15def71eedce0467f8023d1f1979afb6336": {
+                "vendor": "0x9030a15def71EEDCe0467f8023d1F1979aFb6336",
+                "commitment_hash": "08aed8f358620c230b9dad7022564483722102fe88f797d5a3c88cc136584bed",
+                "committed_at": 1794334653,
+                "revealed": false
+              }
+            }
+          }
+        },
+        {
+          "step": "X1",
+          "scenario": "Expected Failure: Duplicate Bid Commitment Blocked",
+          "method": "commit_bid",
+          "account": "Vendor A",
+          "args": [
+            1,
+            "27625b070acca51ab2fce230863661054f331deb2c88ea0870bdcca181a46b7f"
+          ],
+          "hash": "0xab91cf87f713306388e4d55f636d704a8525ef24edad6e3f3e6098438dc3d2a8",
+          "status": "FINALIZED",
+          "executionResult": "ERROR",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "\"ALREADY_COMMITTED\"",
+          "votes": {
+            "0x0174b4D7494Be33F46B76976f6c9F94004F1b27f": "agree",
+            "0x0cf3809a31B0c7E0742d126451aDE1977e3748D2": "agree",
+            "0x1Cd67946A11E6410a3DF1b27d35F4a511e93c882": "agree",
+            "0x8644a8D2D08903cAFA1F0fb28E34E0ecA727e9ED": "idle",
+            "0xf1EAD5E5f876eae701eF1881b42861079cd9A287": "agree"
+          },
+          "expected": "UserError: ALREADY_COMMITTED",
+          "actual": "\"ALREADY_COMMITTED\"",
+          "expectedFailure": true,
+          "readBack": "Duplicate commit blocked by vendor address uniqueness"
+        }
+      ]
+    },
+    "tender2": {
+      "tenderId": 2,
+      "label": "Tender 2 Interrupted by Server Restart Network Disconnection During S7/X4 Window",
+      "transactions": [
+        {
+          "step": "S1",
+          "scenario": "Open Procurement Tender with Technical Specification",
+          "method": "open_tender",
+          "account": "Buyer",
+          "args": [
+            "Production HSM Cluster Procurement",
+            "Mandatory technical requirements: (1) FIPS 140-3 Level 3 certification, (2) at least 10,000 ECDSA-P256 signing operations per second, and (3) dual redundant hot-swappable power supplies.",
+            500,
+            240,
+            480
+          ],
+          "hash": "0x15d05043800b5fb9971bb5e5da193f9b43997a4f248c470a1235841202207378",
+          "status": "FINALIZED",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "2",
+          "votes": {
+            "0x2C93031BCCd12836A67f81a249e68abAFEaac2E5": "agree",
+            "0x2bB088e4E6Fd1faBBd23d93F38D01f28a954A49c": "idle",
+            "0x8644a8D2D08903cAFA1F0fb28E34E0ecA727e9ED": "agree",
+            "0xe1626534791FC675ED813Cc2C89C427866526113": "agree",
+            "0xe83D7241D0FF0f1f808B9ab3cb06dD2565bDc605": "idle"
+          },
+          "expected": "2",
+          "actual": "2",
+          "expectedFailure": false,
+          "readBack": {
+            "id": 2,
+            "buyer": "0x5B0f3d7ecedB2d857DA713F94F41117A0C8dB156",
+            "title": "Production HSM Cluster Procurement",
+            "requirements_spec": "Mandatory technical requirements: (1) FIPS 140-3 Level 3 certification, (2) at least 10,000 ECDSA-P256 signing operations per second, and (3) dual redundant hot-swappable power supplies.",
+            "reserve_price": 500,
+            "commit_duration": 240,
+            "reveal_duration": 480,
+            "commit_deadline": 1794335662,
+            "reveal_deadline": 1794336142,
+            "status": "OPEN",
+            "commits": {},
+            "revealed_bids": [],
+            "reveal_attempts": 0,
+            "settlement": {}
+          }
+        },
+        {
+          "step": "S2",
+          "scenario": "Vendor B Submits Cryptographic Bid Commitment",
+          "method": "commit_bid",
+          "account": "Vendor B",
+          "args": [
+            2,
+            "75c074776468e1c4b23022092263d8d73613f8279fc047b7f2223ac2d3a992f1"
+          ],
+          "hash": "0x8997463966c16f1028a4040ef4d86e9f3c53b1f2606b721891bd1fdbd13fa449",
+          "status": "FINALIZED",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "COMMITTED:TENDER_2:VENDOR_0x31b5b8466098e9801faa4b212e311d6721899a49",
+          "votes": {
+            "0x0cf3809a31B0c7E0742d126451aDE1977e3748D2": "agree",
+            "0x8f1abcAF0fF10678Af925f83b2Bb8b3534c4b94b": "idle",
+            "0xC65Ec56a1141866951B34D846be8EF433764A48B": "agree",
+            "0xD0eD149D26E76cf49fB588c970E608E44Dd4DAB8": "agree",
+            "0xe83D7241D0FF0f1f808B9ab3cb06dD2565bDc605": "agree"
+          },
+          "expected": "COMMITTED:TENDER_2:VENDOR_0x31b5b8466098e9801faa4b212e311d6721899a49",
+          "actual": "COMMITTED:TENDER_2:VENDOR_0x31b5b8466098e9801faa4b212e311d6721899a49",
+          "expectedFailure": false,
+          "readBack": {
+            "commitsCount": 1,
+            "commits": {
+              "0x31b5b8466098e9801faa4b212e311d6721899a49": {
+                "vendor": "0x31b5b8466098E9801Faa4B212E311d6721899A49",
+                "commitment_hash": "75c074776468e1c4b23022092263d8d73613f8279fc047b7f2223ac2d3a992f1",
+                "committed_at": 1794335478,
+                "revealed": false
+              }
+            }
+          }
+        },
+        {
+          "step": "S3",
+          "scenario": "Vendor A Submits Cryptographic Bid Commitment",
+          "method": "commit_bid",
+          "account": "Vendor A",
+          "args": [
+            2,
+            "02cf3204d516cec058a098af291ee0b75def1e612ff0a03418ad2c3cbfe9b56e"
+          ],
+          "hash": "0x86c307b4473bd175c3d11eec8900c599a22d791cc3a287e30c4834fb6e3a444a",
+          "status": "FINALIZED",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "COMMITTED:TENDER_2:VENDOR_0x3c8221b634778c88f6cd1287edeb8cf6e800cf26",
+          "votes": {
+            "0x0cf3809a31B0c7E0742d126451aDE1977e3748D2": "agree",
+            "0x29300188B54F5BFEE91542595611603b4B201008": "idle",
+            "0x2bB088e4E6Fd1faBBd23d93F38D01f28a954A49c": "idle",
+            "0x711353514049EAc21213834ADd07eF552aF394E6": "agree",
+            "0x8f1abcAF0fF10678Af925f83b2Bb8b3534c4b94b": "agree"
+          },
+          "expected": "COMMITTED:TENDER_2:VENDOR_0x3c8221b634778c88f6cd1287edeb8cf6e800cf26",
+          "actual": "COMMITTED:TENDER_2:VENDOR_0x3c8221b634778c88f6cd1287edeb8cf6e800cf26",
+          "expectedFailure": false,
+          "readBack": {
+            "commitsCount": 2,
+            "commits": {
+              "0x31b5b8466098e9801faa4b212e311d6721899a49": {
+                "vendor": "0x31b5b8466098E9801Faa4B212E311d6721899A49",
+                "commitment_hash": "75c074776468e1c4b23022092263d8d73613f8279fc047b7f2223ac2d3a992f1",
+                "committed_at": 1794335478,
+                "revealed": false
+              },
+              "0x3c8221b634778c88f6cd1287edeb8cf6e800cf26": {
+                "vendor": "0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26",
+                "commitment_hash": "02cf3204d516cec058a098af291ee0b75def1e612ff0a03418ad2c3cbfe9b56e",
+                "committed_at": 1794335516,
+                "revealed": false
+              }
+            }
+          }
+        },
+        {
+          "step": "S4",
+          "scenario": "Vendor C Submits Cryptographic Bid Commitment",
+          "method": "commit_bid",
+          "account": "Vendor C",
+          "args": [
+            2,
+            "14345269c01ee772e428442157d4e5934184f78a9ab45288781dd55fa723eb72"
+          ],
+          "hash": "0xa9664f5305a1f8643adb6644ac7eddd58c1fe3b5a23068453acdc5884e6de7da",
+          "status": "FINALIZED",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "COMMITTED:TENDER_2:VENDOR_0x9030a15def71eedce0467f8023d1f1979afb6336",
+          "votes": {
+            "0x0174b4D7494Be33F46B76976f6c9F94004F1b27f": "idle",
+            "0x2C93031BCCd12836A67f81a249e68abAFEaac2E5": "agree",
+            "0x709a1dDECA594C16AB3864A00Eaa2BB1Cd9b5305": "agree",
+            "0x8ADae333478F9D037c78b0E3E8279DdAAb20a1B3": "agree",
+            "0xe83D7241D0FF0f1f808B9ab3cb06dD2565bDc605": "idle"
+          },
+          "expected": "COMMITTED:TENDER_2:VENDOR_0x9030a15def71eedce0467f8023d1f1979afb6336",
+          "actual": "COMMITTED:TENDER_2:VENDOR_0x9030a15def71eedce0467f8023d1f1979afb6336",
+          "expectedFailure": false,
+          "readBack": {
+            "commitsCount": 3,
+            "commits": {
+              "0x31b5b8466098e9801faa4b212e311d6721899a49": {
+                "vendor": "0x31b5b8466098E9801Faa4B212E311d6721899A49",
+                "commitment_hash": "75c074776468e1c4b23022092263d8d73613f8279fc047b7f2223ac2d3a992f1",
+                "committed_at": 1794335478,
+                "revealed": false
+              },
+              "0x3c8221b634778c88f6cd1287edeb8cf6e800cf26": {
+                "vendor": "0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26",
+                "commitment_hash": "02cf3204d516cec058a098af291ee0b75def1e612ff0a03418ad2c3cbfe9b56e",
+                "committed_at": 1794335516,
+                "revealed": false
+              },
+              "0x9030a15def71eedce0467f8023d1f1979afb6336": {
+                "vendor": "0x9030a15def71EEDCe0467f8023d1F1979aFb6336",
+                "commitment_hash": "14345269c01ee772e428442157d4e5934184f78a9ab45288781dd55fa723eb72",
+                "committed_at": 1794335554,
+                "revealed": false
+              }
+            }
+          }
+        },
+        {
+          "step": "X1",
+          "scenario": "Expected Failure: Duplicate Bid Commitment Blocked",
+          "method": "commit_bid",
+          "account": "Vendor A",
+          "args": [
+            2,
+            "02cf3204d516cec058a098af291ee0b75def1e612ff0a03418ad2c3cbfe9b56e"
+          ],
+          "hash": "0xf8dae90fd26556360781b64b21050891e8ebb21774a649717ce4037b63d36a80",
+          "status": "FINALIZED",
+          "executionResult": "ERROR",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "\"ALREADY_COMMITTED\"",
+          "votes": {
+            "0x722474B013fA39E5aA8785f927dCeB0e3F89815B": "agree",
+            "0x8644a8D2D08903cAFA1F0fb28E34E0ecA727e9ED": "idle",
+            "0x8ADae333478F9D037c78b0E3E8279DdAAb20a1B3": "idle",
+            "0x8f1abcAF0fF10678Af925f83b2Bb8b3534c4b94b": "agree",
+            "0xC65Ec56a1141866951B34D846be8EF433764A48B": "agree"
+          },
+          "expected": "UserError: ALREADY_COMMITTED",
+          "actual": "\"ALREADY_COMMITTED\"",
+          "expectedFailure": true,
+          "readBack": "Duplicate commit blocked by vendor address uniqueness"
+        },
+        {
+          "step": "X2",
+          "scenario": "Expected Failure: Premature Bid Reveal Blocked Before Commit Deadline",
+          "method": "reveal_and_evaluate",
+          "account": "Vendor A",
+          "args": [
+            2,
+            210,
+            "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e1_vendor_a_hsm_datasheet.txt",
+            "NitroVault HSM-3000: FIPS 140-3 Level 3 certified, 14,500 ECDSA-P256 ops/sec, dual redundant hot-swappable power supplies.",
+            "salt_vendor_a_210"
+          ],
+          "hash": "0xb958859506618ff84a6cd481fdb6c86b472a7492027ce88273254f264052c79a",
+          "status": "FINALIZED",
+          "executionResult": "ERROR",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "\"COMMIT_PHASE_NOT_ENDED\"",
+          "votes": {
+            "0x0cf3809a31B0c7E0742d126451aDE1977e3748D2": "agree",
+            "0x29300188B54F5BFEE91542595611603b4B201008": "idle",
+            "0x560FBD37a10bC2B96F118071e922c9106c12Ba1d": "agree",
+            "0xD0eD149D26E76cf49fB588c970E608E44Dd4DAB8": "agree",
+            "0xe83D7241D0FF0f1f808B9ab3cb06dD2565bDc605": "idle"
+          },
+          "expected": "UserError: COMMIT_PHASE_NOT_ENDED",
+          "actual": "\"COMMIT_PHASE_NOT_ENDED\"",
+          "expectedFailure": true,
+          "readBack": "Premature reveal strictly rejected by timestamp check"
+        },
+        {
+          "step": "X3",
+          "scenario": "Expected Failure: Tampered Bid Parameters Blocked by Cryptographic Mismatch",
+          "method": "reveal_and_evaluate",
+          "account": "Vendor A",
+          "args": [
+            2,
+            190,
+            "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e1_vendor_a_hsm_datasheet.txt",
+            "NitroVault HSM-3000: FIPS 140-3 Level 3 certified, 14,500 ECDSA-P256 ops/sec, dual redundant hot-swappable power supplies.",
+            "salt_vendor_a_210"
+          ],
+          "hash": "0x73d35e8c9e660c323bec30e1975e5dcb84e957aebfe0d37954e2e7f9f50a4539",
+          "status": "FINALIZED",
+          "executionResult": "ERROR",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "\"COMMITMENT_MISMATCH\"",
+          "votes": {
+            "0x0cf3809a31B0c7E0742d126451aDE1977e3748D2": "agree",
+            "0x709a1dDECA594C16AB3864A00Eaa2BB1Cd9b5305": "agree",
+            "0x8644a8D2D08903cAFA1F0fb28E34E0ecA727e9ED": "agree",
+            "0xD0eD149D26E76cf49fB588c970E608E44Dd4DAB8": "agree",
+            "0xf1EAD5E5f876eae701eF1881b42861079cd9A287": "agree"
+          },
+          "expected": "UserError: COMMITMENT_MISMATCH",
+          "actual": "\"COMMITMENT_MISMATCH\"",
+          "expectedFailure": true,
+          "readBack": "Tampered bid hash rejected against committed sha256"
+        },
+        {
+          "step": "S5",
+          "scenario": "Vendor B Reveals Lowball Non-Compliant Bid (LLM Disqualifies as INELIGIBLE)",
+          "method": "reveal_and_evaluate",
+          "account": "Vendor B",
+          "args": [
+            2,
+            120,
+            "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e2_vendor_b_lowball_datasheet.txt",
+            "BudgetBox Mini-HSM: FIPS 140-2 Level 2 only, 3,200 ECDSA-P256 ops/sec, single non-redundant power supply.",
+            "salt_vendor_b_120"
+          ],
+          "hash": "0x00322399773916622990fc2efbb91a5853483facd7d369459e56d58e130f3312",
+          "status": "FINALIZED",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "REVEALED:ELIGIBILITY_INELIGIBLE:PRICE_120",
+          "votes": {
+            "0x1Cd67946A11E6410a3DF1b27d35F4a511e93c882": "agree",
+            "0x37CD8552B86b2B662eCfb69C4A1253dBE41EB4C1": "agree",
+            "0x8644a8D2D08903cAFA1F0fb28E34E0ecA727e9ED": "idle",
+            "0x8f1abcAF0fF10678Af925f83b2Bb8b3534c4b94b": "agree",
+            "0xf1EAD5E5f876eae701eF1881b42861079cd9A287": "idle"
+          },
+          "expected": "REVEALED:ELIGIBILITY_INELIGIBLE:PRICE_120",
+          "actual": "REVEALED:ELIGIBILITY_INELIGIBLE:PRICE_120",
+          "expectedFailure": false,
+          "readBack": {
+            "revealedBidsCount": 1,
+            "lastRevealed": {
+              "vendor": "0x31b5b8466098E9801Faa4B212E311d6721899A49",
+              "price": 120,
+              "evidence_url": "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e2_vendor_b_lowball_datasheet.txt",
+              "evidence_digest": "4a6eb9235bf766a4ec0882ae68d9799a455b3307acfe20726ce35ce1167d9015",
+              "technical_summary": "BudgetBox Mini-HSM: FIPS 140-2 Level 2 only, 3,200 ECDSA-P256 ops/sec, single non-redundant power supply.",
+              "fetch_status": "OK",
+              "entailment": "SUPPORTED",
+              "eligibility": "INELIGIBLE",
+              "reveal_order": 1
+            }
+          }
+        },
+        {
+          "step": "S6",
+          "scenario": "Vendor A Reveals Compliant Bid (LLM Verifies and Evaluates as ELIGIBLE)",
+          "method": "reveal_and_evaluate",
+          "account": "Vendor A",
+          "args": [
+            2,
+            210,
+            "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e1_vendor_a_hsm_datasheet.txt",
+            "NitroVault HSM-3000: FIPS 140-3 Level 3 certified, 14,500 ECDSA-P256 ops/sec, dual redundant hot-swappable power supplies.",
+            "salt_vendor_a_210"
+          ],
+          "hash": "0xb581e0d3508b7f04658d5fadafbdc3ede847e9a949489afe94f5f4f73a17a955",
+          "status": "FINALIZED",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "returnOrError": "REVEALED:ELIGIBILITY_ELIGIBLE:PRICE_210",
+          "votes": {
+            "0x709a1dDECA594C16AB3864A00Eaa2BB1Cd9b5305": "agree",
+            "0x711353514049EAc21213834ADd07eF552aF394E6": "idle",
+            "0x8ADae333478F9D037c78b0E3E8279DdAAb20a1B3": "agree",
+            "0x8f1abcAF0fF10678Af925f83b2Bb8b3534c4b94b": "agree",
+            "0xf1EAD5E5f876eae701eF1881b42861079cd9A287": "idle"
+          },
+          "expected": "REVEALED:ELIGIBILITY_ELIGIBLE:PRICE_210",
+          "actual": "REVEALED:ELIGIBILITY_ELIGIBLE:PRICE_210",
+          "expectedFailure": false,
+          "readBack": {
+            "revealedBidsCount": 2,
+            "lastRevealed": {
+              "vendor": "0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26",
+              "price": 210,
+              "evidence_url": "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e1_vendor_a_hsm_datasheet.txt",
+              "evidence_digest": "46621336c20d899c37bfc576baf5419e52abacd47244a3f708b6cb2f8e0014af",
+              "technical_summary": "NitroVault HSM-3000: FIPS 140-3 Level 3 certified, 14,500 ECDSA-P256 ops/sec, dual redundant hot-swappable power supplies.",
+              "fetch_status": "OK",
+              "entailment": "SUPPORTED",
+              "eligibility": "ELIGIBLE",
+              "reveal_order": 2
+            }
+          }
+        }
+      ]
+    }
+  },
+  "demoTender": {
+    "tenderId": 3,
+    "title": "Production HSM Cluster Procurement",
+    "reservePrice": 500,
+    "commitDuration": 240,
+    "revealDuration": 480
+  },
+  "transactions": [
+    {
+      "step": "S1",
+      "scenario": "Open Procurement Tender with Technical Specification",
+      "method": "open_tender",
+      "account": "Buyer",
+      "args": [
+        "Production HSM Cluster Procurement",
+        "Mandatory technical requirements: (1) FIPS 140-3 Level 3 certification, (2) at least 10,000 ECDSA-P256 signing operations per second, and (3) dual redundant hot-swappable power supplies.",
+        500,
+        240,
+        480
+      ],
+      "hash": "0xbf526bc292e73059b7810d63d48220ecb67f5e2af3d762306a05e6f7287f700d",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "3",
+      "votes": {
+        "0x2C93031BCCd12836A67f81a249e68abAFEaac2E5": "idle",
+        "0x709a1dDECA594C16AB3864A00Eaa2BB1Cd9b5305": "idle",
+        "0x711353514049EAc21213834ADd07eF552aF394E6": "agree",
+        "0x722474B013fA39E5aA8785f927dCeB0e3F89815B": "agree",
+        "0xD0eD149D26E76cf49fB588c970E608E44Dd4DAB8": "agree"
+      },
+      "expected": "3",
+      "actual": "3",
+      "expectedFailure": false,
+      "readBack": {
+        "id": 3,
+        "buyer": "0x5B0f3d7ecedB2d857DA713F94F41117A0C8dB156",
+        "title": "Production HSM Cluster Procurement",
+        "requirements_spec": "Mandatory technical requirements: (1) FIPS 140-3 Level 3 certification, (2) at least 10,000 ECDSA-P256 signing operations per second, and (3) dual redundant hot-swappable power supplies.",
+        "reserve_price": 500,
+        "commit_duration": 240,
+        "reveal_duration": 480,
+        "commit_deadline": 1794392842,
+        "reveal_deadline": 1794393322,
+        "status": "OPEN",
+        "commits": {},
+        "revealed_bids": [],
+        "reveal_attempts": 0,
+        "settlement": {}
+      }
+    },
+    {
+      "step": "S2",
+      "scenario": "Vendor B Submits Cryptographic Bid Commitment",
+      "method": "commit_bid",
+      "account": "Vendor B",
+      "args": [
+        3,
+        "3a0db7673d758e6b8e2591e61382bb8a7d51aebe55bfda6e19946c779cc68751"
+      ],
+      "hash": "0xd835e3f330c925388b2e252dc4d6b56192746f2b5b1640055381b8cf5d843271",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "COMMITTED:TENDER_3:VENDOR_0x31b5b8466098e9801faa4b212e311d6721899a49",
+      "votes": {
+        "0x29300188B54F5BFEE91542595611603b4B201008": "agree",
+        "0x2bB088e4E6Fd1faBBd23d93F38D01f28a954A49c": "agree",
+        "0x8644a8D2D08903cAFA1F0fb28E34E0ecA727e9ED": "agree",
+        "0x8f1abcAF0fF10678Af925f83b2Bb8b3534c4b94b": "idle",
+        "0xe83D7241D0FF0f1f808B9ab3cb06dD2565bDc605": "agree"
+      },
+      "expected": "COMMITTED:TENDER_3:VENDOR_0x31b5b8466098e9801faa4b212e311d6721899a49",
+      "actual": "COMMITTED:TENDER_3:VENDOR_0x31b5b8466098e9801faa4b212e311d6721899a49",
+      "expectedFailure": false,
+      "readBack": {
+        "commitsCount": 1,
+        "commits": {
+          "0x31b5b8466098e9801faa4b212e311d6721899a49": {
+            "vendor": "0x31b5b8466098E9801Faa4B212E311d6721899A49",
+            "commitment_hash": "3a0db7673d758e6b8e2591e61382bb8a7d51aebe55bfda6e19946c779cc68751",
+            "committed_at": 1794392651,
+            "revealed": false
+          }
+        }
+      }
+    },
+    {
+      "step": "S3",
+      "scenario": "Vendor A Submits Cryptographic Bid Commitment",
+      "method": "commit_bid",
+      "account": "Vendor A",
+      "args": [
+        3,
+        "8b14ec0bf88424570df219805f5880104d76e3fcef4d31bc71f7dd74bb5ed772"
+      ],
+      "hash": "0x74147689ad2e1c6fab50a5a82af21901b7685f79f78fa6920142c7b213a21177",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "COMMITTED:TENDER_3:VENDOR_0x3c8221b634778c88f6cd1287edeb8cf6e800cf26",
+      "votes": {
+        "0x1Cd67946A11E6410a3DF1b27d35F4a511e93c882": "agree",
+        "0x2C93031BCCd12836A67f81a249e68abAFEaac2E5": "agree",
+        "0x37CD8552B86b2B662eCfb69C4A1253dBE41EB4C1": "agree",
+        "0x8644a8D2D08903cAFA1F0fb28E34E0ecA727e9ED": "idle",
+        "0xc675c2B7E1F066B7c1D2fe54EF7B76C91CdFa5F4": "idle"
+      },
+      "expected": "COMMITTED:TENDER_3:VENDOR_0x3c8221b634778c88f6cd1287edeb8cf6e800cf26",
+      "actual": "COMMITTED:TENDER_3:VENDOR_0x3c8221b634778c88f6cd1287edeb8cf6e800cf26",
+      "expectedFailure": false,
+      "readBack": {
+        "commitsCount": 2,
+        "commits": {
+          "0x31b5b8466098e9801faa4b212e311d6721899a49": {
+            "vendor": "0x31b5b8466098E9801Faa4B212E311d6721899A49",
+            "commitment_hash": "3a0db7673d758e6b8e2591e61382bb8a7d51aebe55bfda6e19946c779cc68751",
+            "committed_at": 1794392651,
+            "revealed": false
+          },
+          "0x3c8221b634778c88f6cd1287edeb8cf6e800cf26": {
+            "vendor": "0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26",
+            "commitment_hash": "8b14ec0bf88424570df219805f5880104d76e3fcef4d31bc71f7dd74bb5ed772",
+            "committed_at": 1794392695,
+            "revealed": false
+          }
+        }
+      }
+    },
+    {
+      "step": "S4",
+      "scenario": "Vendor C Submits Cryptographic Bid Commitment",
+      "method": "commit_bid",
+      "account": "Vendor C",
+      "args": [
+        3,
+        "0fb61326414f2380b2672d3d7f266e8c474d91156a5caf39c1605007d896eaf0"
+      ],
+      "hash": "0x3cf777fddc151f5949021f524fb9e488abd8848d34486dbc22b30a19c374f647",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "COMMITTED:TENDER_3:VENDOR_0x9030a15def71eedce0467f8023d1f1979afb6336",
+      "votes": {
+        "0x2bB088e4E6Fd1faBBd23d93F38D01f28a954A49c": "idle",
+        "0x709a1dDECA594C16AB3864A00Eaa2BB1Cd9b5305": "agree",
+        "0x8ADae333478F9D037c78b0E3E8279DdAAb20a1B3": "agree",
+        "0xC65Ec56a1141866951B34D846be8EF433764A48B": "idle",
+        "0xe1626534791FC675ED813Cc2C89C427866526113": "agree"
+      },
+      "expected": "COMMITTED:TENDER_3:VENDOR_0x9030a15def71eedce0467f8023d1f1979afb6336",
+      "actual": "COMMITTED:TENDER_3:VENDOR_0x9030a15def71eedce0467f8023d1f1979afb6336",
+      "expectedFailure": false,
+      "readBack": {
+        "commitsCount": 3,
+        "commits": {
+          "0x31b5b8466098e9801faa4b212e311d6721899a49": {
+            "vendor": "0x31b5b8466098E9801Faa4B212E311d6721899A49",
+            "commitment_hash": "3a0db7673d758e6b8e2591e61382bb8a7d51aebe55bfda6e19946c779cc68751",
+            "committed_at": 1794392651,
+            "revealed": false
+          },
+          "0x3c8221b634778c88f6cd1287edeb8cf6e800cf26": {
+            "vendor": "0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26",
+            "commitment_hash": "8b14ec0bf88424570df219805f5880104d76e3fcef4d31bc71f7dd74bb5ed772",
+            "committed_at": 1794392695,
+            "revealed": false
+          },
+          "0x9030a15def71eedce0467f8023d1f1979afb6336": {
+            "vendor": "0x9030a15def71EEDCe0467f8023d1F1979aFb6336",
+            "commitment_hash": "0fb61326414f2380b2672d3d7f266e8c474d91156a5caf39c1605007d896eaf0",
+            "committed_at": 1794392734,
+            "revealed": false
+          }
+        }
+      }
+    },
+    {
+      "step": "X1",
+      "scenario": "Expected Failure: Duplicate Bid Commitment Blocked",
+      "method": "commit_bid",
+      "account": "Vendor A",
+      "args": [
+        3,
+        "8b14ec0bf88424570df219805f5880104d76e3fcef4d31bc71f7dd74bb5ed772"
+      ],
+      "hash": "0x668052c7c9748fdbdb08acd5320c3e4b53a8a0d19387cf0b294b26ba1c15975c",
+      "status": "FINALIZED",
+      "executionResult": "ERROR",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "\"ALREADY_COMMITTED\"",
+      "votes": {
+        "0x1Cd67946A11E6410a3DF1b27d35F4a511e93c882": "idle",
+        "0x2bB088e4E6Fd1faBBd23d93F38D01f28a954A49c": "agree",
+        "0x560FBD37a10bC2B96F118071e922c9106c12Ba1d": "agree",
+        "0x8f1abcAF0fF10678Af925f83b2Bb8b3534c4b94b": "idle",
+        "0xe83D7241D0FF0f1f808B9ab3cb06dD2565bDc605": "agree"
+      },
+      "expected": "UserError: ALREADY_COMMITTED",
+      "actual": "\"ALREADY_COMMITTED\"",
+      "expectedFailure": true,
+      "readBack": "Duplicate commit blocked by vendor address uniqueness"
+    },
+    {
+      "step": "X2",
+      "scenario": "Expected Failure: Premature Bid Reveal Blocked Before Commit Deadline",
+      "method": "reveal_and_evaluate",
+      "account": "Vendor A",
+      "args": [
+        3,
+        210,
+        "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e1_vendor_a_hsm_datasheet.txt",
+        "NitroVault HSM-3000: FIPS 140-3 Level 3 certified, 14,500 ECDSA-P256 ops/sec, dual redundant hot-swappable power supplies.",
+        "salt_vendor_a_210"
+      ],
+      "hash": "0x01226109db4cdecbea5b381db11a8cbe0b64aea82a9c45981cb0845a81efc9bf",
+      "status": "FINALIZED",
+      "executionResult": "ERROR",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "\"COMMIT_PHASE_NOT_ENDED\"",
+      "votes": {
+        "0x1Cd67946A11E6410a3DF1b27d35F4a511e93c882": "agree",
+        "0x2bB088e4E6Fd1faBBd23d93F38D01f28a954A49c": "idle",
+        "0x711353514049EAc21213834ADd07eF552aF394E6": "agree",
+        "0xe1626534791FC675ED813Cc2C89C427866526113": "idle",
+        "0xf1EAD5E5f876eae701eF1881b42861079cd9A287": "agree"
+      },
+      "expected": "UserError: COMMIT_PHASE_NOT_ENDED",
+      "actual": "\"COMMIT_PHASE_NOT_ENDED\"",
+      "expectedFailure": true,
+      "readBack": "Premature reveal strictly rejected by timestamp check"
+    },
+    {
+      "step": "X3",
+      "scenario": "Expected Failure: Tampered Bid Parameters Blocked by Cryptographic Mismatch",
+      "method": "reveal_and_evaluate",
+      "account": "Vendor A",
+      "args": [
+        3,
+        190,
+        "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e1_vendor_a_hsm_datasheet.txt",
+        "NitroVault HSM-3000: FIPS 140-3 Level 3 certified, 14,500 ECDSA-P256 ops/sec, dual redundant hot-swappable power supplies.",
+        "salt_vendor_a_210"
+      ],
+      "hash": "0x7461a06bde69d3056b230664122ef176ec0018e3b15dbc4930a98666cb1f5bd3",
+      "status": "FINALIZED",
+      "executionResult": "ERROR",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "\"COMMITMENT_MISMATCH\"",
+      "votes": {
+        "0x0174b4D7494Be33F46B76976f6c9F94004F1b27f": "idle",
+        "0x560FBD37a10bC2B96F118071e922c9106c12Ba1d": "idle",
+        "0x709a1dDECA594C16AB3864A00Eaa2BB1Cd9b5305": "agree",
+        "0xc675c2B7E1F066B7c1D2fe54EF7B76C91CdFa5F4": "agree",
+        "0xe1626534791FC675ED813Cc2C89C427866526113": "agree"
+      },
+      "expected": "UserError: COMMITMENT_MISMATCH",
+      "actual": "\"COMMITMENT_MISMATCH\"",
+      "expectedFailure": true,
+      "readBack": "Tampered bid hash rejected against committed sha256"
+    },
+    {
+      "step": "S5",
+      "scenario": "Vendor B Reveals Lowball Non-Compliant Bid (LLM Disqualifies as INELIGIBLE)",
+      "method": "reveal_and_evaluate",
+      "account": "Vendor B",
+      "args": [
+        3,
+        120,
+        "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e2_vendor_b_lowball_datasheet.txt",
+        "BudgetBox Mini-HSM: FIPS 140-2 Level 2 only, 3,200 ECDSA-P256 ops/sec, single non-redundant power supply.",
+        "salt_vendor_b_120"
+      ],
+      "hash": "0x236277f57fd25392c883f3455ea218c401fbacfe3d09fded4235c37b7f58560f",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "REVEALED:ELIGIBILITY_INELIGIBLE:PRICE_120",
+      "votes": {
+        "0x2C93031BCCd12836A67f81a249e68abAFEaac2E5": "idle",
+        "0x722474B013fA39E5aA8785f927dCeB0e3F89815B": "agree",
+        "0x8ADae333478F9D037c78b0E3E8279DdAAb20a1B3": "agree",
+        "0xc675c2B7E1F066B7c1D2fe54EF7B76C91CdFa5F4": "idle",
+        "0xe1626534791FC675ED813Cc2C89C427866526113": "agree"
+      },
+      "expected": "REVEALED:ELIGIBILITY_INELIGIBLE:PRICE_120",
+      "actual": "REVEALED:ELIGIBILITY_INELIGIBLE:PRICE_120",
+      "expectedFailure": false,
+      "readBack": {
+        "revealedBidsCount": 1,
+        "lastRevealed": {
+          "vendor": "0x31b5b8466098E9801Faa4B212E311d6721899A49",
+          "price": 120,
+          "evidence_url": "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e2_vendor_b_lowball_datasheet.txt",
+          "evidence_digest": "4a6eb9235bf766a4ec0882ae68d9799a455b3307acfe20726ce35ce1167d9015",
+          "technical_summary": "BudgetBox Mini-HSM: FIPS 140-2 Level 2 only, 3,200 ECDSA-P256 ops/sec, single non-redundant power supply.",
+          "fetch_status": "OK",
+          "entailment": "SUPPORTED",
+          "eligibility": "INELIGIBLE",
+          "reveal_order": 1
+        }
+      }
+    },
+    {
+      "step": "S6",
+      "scenario": "Vendor A Reveals Compliant Bid (LLM Verifies and Evaluates as ELIGIBLE)",
+      "method": "reveal_and_evaluate",
+      "account": "Vendor A",
+      "args": [
+        3,
+        210,
+        "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e1_vendor_a_hsm_datasheet.txt",
+        "NitroVault HSM-3000: FIPS 140-3 Level 3 certified, 14,500 ECDSA-P256 ops/sec, dual redundant hot-swappable power supplies.",
+        "salt_vendor_a_210"
+      ],
+      "hash": "0x9c69e037842f15d3aaf393b8709fae8fb79b198ce1cc64a0e44d73791f0b1c93",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "REVEALED:ELIGIBILITY_ELIGIBLE:PRICE_210",
+      "votes": {
+        "0x2C93031BCCd12836A67f81a249e68abAFEaac2E5": "idle",
+        "0x37CD8552B86b2B662eCfb69C4A1253dBE41EB4C1": "agree",
+        "0x711353514049EAc21213834ADd07eF552aF394E6": "agree",
+        "0x722474B013fA39E5aA8785f927dCeB0e3F89815B": "agree",
+        "0xD0eD149D26E76cf49fB588c970E608E44Dd4DAB8": "idle"
+      },
+      "expected": "REVEALED:ELIGIBILITY_ELIGIBLE:PRICE_210",
+      "actual": "REVEALED:ELIGIBILITY_ELIGIBLE:PRICE_210",
+      "expectedFailure": false,
+      "readBack": {
+        "revealedBidsCount": 2,
+        "lastRevealed": {
+          "vendor": "0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26",
+          "price": 210,
+          "evidence_url": "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e1_vendor_a_hsm_datasheet.txt",
+          "evidence_digest": "46621336c20d899c37bfc576baf5419e52abacd47244a3f708b6cb2f8e0014af",
+          "technical_summary": "NitroVault HSM-3000: FIPS 140-3 Level 3 certified, 14,500 ECDSA-P256 ops/sec, dual redundant hot-swappable power supplies.",
+          "fetch_status": "OK",
+          "entailment": "SUPPORTED",
+          "eligibility": "ELIGIBLE",
+          "reveal_order": 2
+        }
+      }
+    },
+    {
+      "step": "S7",
+      "scenario": "Vendor C Reveals Compliant Higher Bid (LLM Verifies and Evaluates as ELIGIBLE)",
+      "method": "reveal_and_evaluate",
+      "account": "Vendor C",
+      "args": [
+        3,
+        340,
+        "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e3_vendor_c_hsm_datasheet.txt",
+        "AegisCore HSM-9000: FIPS 140-3 Level 3 certified, 22,000 ECDSA-P256 ops/sec, dual redundant hot-swappable power supplies.",
+        "salt_vendor_c_340"
+      ],
+      "hash": "0xc53c885672cb9d48958b09f4a39a80c62ad9be36722543b0056a05e689408186",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "REVEALED:ELIGIBILITY_ELIGIBLE:PRICE_340",
+      "votes": {
+        "0x1Cd67946A11E6410a3DF1b27d35F4a511e93c882": "idle",
+        "0x560FBD37a10bC2B96F118071e922c9106c12Ba1d": "agree",
+        "0x722474B013fA39E5aA8785f927dCeB0e3F89815B": "agree",
+        "0xC65Ec56a1141866951B34D846be8EF433764A48B": "agree",
+        "0xe83D7241D0FF0f1f808B9ab3cb06dD2565bDc605": "idle"
+      },
+      "expected": "REVEALED:ELIGIBILITY_ELIGIBLE:PRICE_340",
+      "actual": "REVEALED:ELIGIBILITY_ELIGIBLE:PRICE_340",
+      "expectedFailure": false,
+      "readBack": {
+        "revealedBidsCount": 3,
+        "lastRevealed": {
+          "vendor": "0x9030a15def71EEDCe0467f8023d1F1979aFb6336",
+          "price": 340,
+          "evidence_url": "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e3_vendor_c_hsm_datasheet.txt",
+          "evidence_digest": "756f48dc69a54190d56a2bd40c97ce842a86260f04eab6d009906fe1c8a6fc27",
+          "technical_summary": "AegisCore HSM-9000: FIPS 140-3 Level 3 certified, 22,000 ECDSA-P256 ops/sec, dual redundant hot-swappable power supplies.",
+          "fetch_status": "OK",
+          "entailment": "SUPPORTED",
+          "eligibility": "ELIGIBLE",
+          "reveal_order": 3
+        }
+      }
+    },
+    {
+      "step": "X4",
+      "scenario": "Expected Failure: Duplicate Bid Reveal Blocked",
+      "method": "reveal_and_evaluate",
+      "account": "Vendor A",
+      "args": [
+        3,
+        210,
+        "https://raw.githubusercontent.com/khezzed/SealedBidProcurement/1108c56ea9f70058e196926cf9910dc3eec09cbc/evidence/e1_vendor_a_hsm_datasheet.txt",
+        "NitroVault HSM-3000: FIPS 140-3 Level 3 certified, 14,500 ECDSA-P256 ops/sec, dual redundant hot-swappable power supplies.",
+        "salt_vendor_a_210"
+      ],
+      "hash": "0x7b42a52185ab45784966ade7bf1fd5f8956b6affad2ba8f08c53d4a874149d28",
+      "status": "FINALIZED",
+      "executionResult": "ERROR",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "\"ALREADY_REVEALED\"",
+      "votes": {
+        "0x0cf3809a31B0c7E0742d126451aDE1977e3748D2": "idle",
+        "0x37CD8552B86b2B662eCfb69C4A1253dBE41EB4C1": "agree",
+        "0x709a1dDECA594C16AB3864A00Eaa2BB1Cd9b5305": "agree",
+        "0x711353514049EAc21213834ADd07eF552aF394E6": "agree",
+        "0xc675c2B7E1F066B7c1D2fe54EF7B76C91CdFa5F4": "idle"
+      },
+      "expected": "UserError: ALREADY_REVEALED",
+      "actual": "\"ALREADY_REVEALED\"",
+      "expectedFailure": true,
+      "readBack": "Duplicate reveal blocked by revealed flag"
+    },
+    {
+      "step": "X5",
+      "scenario": "Expected Failure: Premature Tender Settlement Blocked Before Reveal Deadline",
+      "method": "settle_tender",
+      "account": "Buyer",
+      "args": [
+        3
+      ],
+      "hash": "0x62eb064ded954eadcf36e3dc1012b9041d1be3d3c35e3a1b8426049d9881784b",
+      "status": "FINALIZED",
+      "executionResult": "ERROR",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "\"REVEAL_PHASE_NOT_ENDED\"",
+      "votes": {
+        "0x1Cd67946A11E6410a3DF1b27d35F4a511e93c882": "agree",
+        "0x37CD8552B86b2B662eCfb69C4A1253dBE41EB4C1": "agree",
+        "0x722474B013fA39E5aA8785f927dCeB0e3F89815B": "idle",
+        "0xC65Ec56a1141866951B34D846be8EF433764A48B": "idle",
+        "0xe1626534791FC675ED813Cc2C89C427866526113": "agree"
+      },
+      "expected": "UserError: REVEAL_PHASE_NOT_ENDED",
+      "actual": "\"REVEAL_PHASE_NOT_ENDED\"",
+      "expectedFailure": true,
+      "readBack": "Premature settlement strictly rejected by reveal timestamp check"
+    },
+    {
+      "step": "S8",
+      "scenario": "Permissionless Vickrey Second-Price Settlement (Awards Vendor A at Clearing Price 340)",
+      "method": "settle_tender",
+      "account": "Vendor C",
+      "args": [
+        3
+      ],
+      "hash": "0x307682af7adba04400d2bf48cbdb1cd94b7f57e979b91c8ea6df66f33609d6c4",
+      "status": "FINALIZED",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "SETTLED:AWARDED:WINNER_0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26:CLEARING_340",
+      "votes": {
+        "0x2C93031BCCd12836A67f81a249e68abAFEaac2E5": "agree",
+        "0x560FBD37a10bC2B96F118071e922c9106c12Ba1d": "idle",
+        "0x709a1dDECA594C16AB3864A00Eaa2BB1Cd9b5305": "agree",
+        "0x722474B013fA39E5aA8785f927dCeB0e3F89815B": "idle",
+        "0xe83D7241D0FF0f1f808B9ab3cb06dD2565bDc605": "agree"
+      },
+      "expected": "SETTLED:AWARDED:WINNER_0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26:CLEARING_340",
+      "actual": "SETTLED:AWARDED:WINNER_0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26:CLEARING_340",
+      "expectedFailure": false,
+      "readBack": {
+        "status": "AWARDED",
+        "settlement": {
+          "outcome": "AWARDED",
+          "winner": "0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26",
+          "winning_bid": 210,
+          "clearing_price": 340,
+          "savings": 160,
+          "eligible_count": 2
+        }
+      }
+    },
+    {
+      "step": "X6",
+      "scenario": "Expected Failure: Double Settlement Blocked",
+      "method": "settle_tender",
+      "account": "Buyer",
+      "args": [
+        3
+      ],
+      "hash": "0x20f9297dc876263b59a9653102b8f91d62f2a812b018aa2bf7f54dc44e0a2168",
+      "status": "FINALIZED",
+      "executionResult": "ERROR",
+      "consensusResult": "MAJORITY_AGREE",
+      "returnOrError": "\"TENDER_ALREADY_SETTLED\"",
+      "votes": {
+        "0x0174b4D7494Be33F46B76976f6c9F94004F1b27f": "agree",
+        "0x29300188B54F5BFEE91542595611603b4B201008": "agree",
+        "0x37CD8552B86b2B662eCfb69C4A1253dBE41EB4C1": "idle",
+        "0x8ADae333478F9D037c78b0E3E8279DdAAb20a1B3": "agree",
+        "0xe1626534791FC675ED813Cc2C89C427866526113": "agree"
+      },
+      "expected": "UserError: TENDER_ALREADY_SETTLED",
+      "actual": "\"TENDER_ALREADY_SETTLED\"",
+      "expectedFailure": true,
+      "readBack": "Double settlement prevented by status check"
+    }
+  ],
+  "finalTenderState": {
+    "status": "AWARDED",
+    "settlement": {
+      "outcome": "AWARDED",
+      "winner": "0x3C8221b634778C88F6cD1287EDeB8cf6E800Cf26",
+      "winning_bid": 210,
+      "clearing_price": 340,
+      "savings": 160,
+      "eligible_count": 2
+    }
+  }
+}
